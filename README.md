@@ -13,6 +13,9 @@ A/B 테스트가 조용히 틀리는 지점을 시뮬레이션으로 검증하�
 세 경우 모두 두 그룹에 실제 차이 없음.
 각 수치는 1,000회 시뮬레이션으로 측정했으며, `notebooks/`에서 재현 가능.
 
+대응 기법도 함께 다룬다. CUPED로 분산을 절반으로 줄여 같은 데이터에서
+p값이 0.0713 → 0.0039로 개선되는 사례를 `02_cuped`에서 확인할 수 있다.
+
 ## 왜 만들었나
 
 A/B 테스트 결과를 판정하는 과정을 학습하면서, 두 그룹에 진짜 차이가 0인 데이터에서
@@ -21,6 +24,15 @@ A/B 테스트 결과를 판정하는 과정을 학습하면서, 두 그룹에 �
 이런 실패는 세가지 경로로 발생.
 세그먼트를 여러개 확인하거나, 실험 중간에 반복해서 들여다보거나, 배정 비율이 어긋난 경우.
 각각이 얼마나 위험한지 수치로 확인하기 위해 시뮬레이션으로 정량화.
+
+## 노트북
+
+|                                                            | 내용                                    |
+| ---------------------------------------------------------- | --------------------------------------- |
+| [01_peeking](notebooks/01_peeking.ipynb)                   | 실험 중간 확인이 위양성률에 미치는 영향 |
+| [02_cuped](notebooks/02_cuped.ipynb)                       | 실험 전 데이터로 분산을 줄여 표본 절약  |
+| [03_multiple_testing](notebooks/03_multiple_testing.ipynb) | 세그먼트를 여러 개 볼 때의 위험과 보정  |
+| [04_srm](notebooks/04_srm.ipynb)                           | 배정 비율 불일치 탐지와 대응            |
 
 ## 설치
 
@@ -62,6 +74,15 @@ check_srm([4800, 5200])
 # {'p_value': 6.3e-05, 'srm': True, ...}
 ```
 
+### 분산 감소
+
+```python
+from abtest_lab.variance import apply_cuped
+
+post_adj, theta = apply_cuped(post, pre)
+# 표준편차 6405.7 → 3021.1 (theta=0.807)
+```
+
 ## 구조
 
 ```
@@ -70,10 +91,10 @@ abtest-lab/
 │   ├── testing.py       # 가설검정 (z검정, 신뢰구간, 순열검정)
 │   ├── power.py         # 표본수·MDE 계산
 │   ├── diagnostics.py   # SRM 탐지
+│   ├── variance.py      # CUPED 분산 감소
 │   └── simulation.py    # 위양성률 시뮬레이션
-├── tests/               # pytest 11개
-├── notebooks/
-│   └── 01_peeking.ipynb # 엿보기 문제 시연
+├── tests/               # pytest 14개
+├── notebooks/           # 시연 노트북 4개
 └── pyproject.toml
 ```
 
