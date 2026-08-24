@@ -33,9 +33,10 @@ A/B 테스트 결과를 판정하는 과정을 학습하면서, 두 그룹에 �
 |                                                            | 내용                                    |
 | ---------------------------------------------------------- | --------------------------------------- |
 | [01_peeking](notebooks/01_peeking.ipynb)                   | 실험 중간 확인이 위양성률에 미치는 영향 |
-| [02_cuped](notebooks/02_cuped.ipynb)                       | 실험 전 데이터로 분산을 줄여 표본 절약  |
+| [02_sequential](notebooks/02_sequential.ipynb)             | 알파 소비 함수로 엿보기 문제 억제       |
 | [03_multiple_testing](notebooks/03_multiple_testing.ipynb) | 세그먼트를 여러 개 볼 때의 위험과 보정  |
 | [04_srm](notebooks/04_srm.ipynb)                           | 배정 비율 불일치 탐지와 대응            |
+| [05_cuped](notebooks/05_cuped.ipynb)                       | 실험 전 데이터로 분산을 줄여 표본 절약  |
 
 ## 설치
 
@@ -105,8 +106,9 @@ abtest-lab/
 │   ├── power.py         # 표본수·MDE 계산
 │   ├── diagnostics.py   # SRM 탐지
 │   ├── variance.py      # CUPED 분산 감소
-│   └── simulation.py    # 위양성률 시뮬레이션
-├── tests/               # pytest 14개
+│   ├── simulation.py    # 위양성률 시뮬레이션
+│   ├── sequential.py    # 순차검정 (알파 소비 함수)
+├── tests/               # pytest 17개
 ├── notebooks/           # 시연 노트북 4개
 └── pyproject.toml
 ```
