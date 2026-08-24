@@ -13,8 +13,11 @@ A/B 테스트가 조용히 틀리는 지점을 시뮬레이션으로 검증하�
 세 경우 모두 두 그룹에 실제 차이 없음.
 각 수치는 1,000회 시뮬레이션으로 측정했으며, `notebooks/`에서 재현 가능.
 
+순차검정을 적용하면 30일 매일 확인해도 위양성률이 0.7%로 유지되며,
+검정력 손실은 1%p에 그친다(`02_sequential`).
+
 대응 기법도 함께 다룬다. CUPED로 분산을 절반으로 줄여 같은 데이터에서
-p값이 0.0713 → 0.0039로 개선되는 사례를 `02_cuped`에서 확인할 수 있다.
+p값이 0.0713 → 0.0039로 개선되는 사례를 `05_cuped`에서 확인할 수 있다.
 
 ## 왜 만들었나
 
@@ -81,6 +84,16 @@ from abtest_lab.variance import apply_cuped
 
 post_adj, theta = apply_cuped(post, pre)
 # 표준편차 6405.7 → 3021.1 (theta=0.807)
+```
+
+### 중간 확인이 필요할 때
+
+```python
+from abtest_lab.sequential import sequential_boundaries
+
+sequential_boundaries(5)
+# [1e-05, 0.00193, 0.00945, 0.01703, 0.02157]
+# 각 확인 시점에 적용할 p값 기준. 합은 0.05
 ```
 
 ## 구조
