@@ -1,5 +1,7 @@
 # abtest-lab
 
+![tests](https://github.com/duckchicken-ops/abtest-lab/actions/workflows/test.yml/badge.svg)
+
 A/B 테스트가 조용히 틀리는 지점을 시뮬레이션으로 검증하는 도구.
 
 ## 핵심 발견
