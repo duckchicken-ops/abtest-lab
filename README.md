@@ -40,6 +40,13 @@ A/B 테스트 결과를 판정하는 과정을 학습하면서, 두 그룹에 �
 | [04_srm](notebooks/04_srm.ipynb)                           | 배정 비율 불일치 탐지와 대응            |
 | [05_cuped](notebooks/05_cuped.ipynb)                       | 실험 전 데이터로 분산을 줄여 표본 절약  |
 
+## 문서
+
+노트북이 함정의 존재를 보인다면, 아래 문서는 그것을 피하는 절차를 담는다.
+
+- [실험 설계 템플릿](docs/experiment_design_template.md) — 실험 시작 전 작성하는 체크리스트
+- [작성 예시](docs/example_checkout_button.md) — 템플릿을 채운 가상 사례
+
 ## 설치
 
 ```bash
